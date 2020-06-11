@@ -3,6 +3,8 @@ using System.IO;
 using System.Globalization;
 using System.Data;
 using CsvHelper;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace IPLDataProject
 {
@@ -21,7 +23,6 @@ namespace IPLDataProject
                 }
             }
 
-            Console.WriteLine("-----------------------------------=======");
 
             var deliveries = ReadDeliveries();
 
@@ -32,6 +33,30 @@ namespace IPLDataProject
                 {
                     Console.WriteLine(item);
                 }
+            }
+
+            // Result, Total number of matches played in all seasons
+            MatchesPlayedPerSeason(matches);
+
+        }
+
+        //Matches Played Per Seasons
+        static void MatchesPlayedPerSeason(DataTable matches)
+        {
+            
+           var matchesIEnumerable = matches.AsEnumerable();
+            var matchesPerSeason = from match in matchesIEnumerable 
+
+                          group match by match.Field<string>("season") into matchesEachSeason
+                          orderby matchesEachSeason.Key
+                          select new
+                          {
+                              season = matchesEachSeason.Key,
+                              matches = matchesEachSeason.Count()
+                          };
+            foreach (var item in matchesPerSeason)
+            {
+                Console.WriteLine($"{item.season}, {item.matches}");
             }
         }
 
