@@ -1,4 +1,4 @@
-# Data Project 1
+# IPL Data Project
 ---
 
 #### Dependencies
