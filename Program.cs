@@ -59,10 +59,10 @@ namespace IPLDataProject
                 using (var dr = new CsvDataReader(csvObject))
                 {
                     var deliveriesTable = new DataTable();
-                    // deliveries.Columns.Add("wide_runs", typeof(int));
-                    // deliveries.Columns.Add("noball_runs", typeof(int));
-                    // deliveries.Columns.Add("extra_runs", typeof(int));
-                    // deliveries.Columns.Add("total_runs", typeof(int));
+                    deliveriesTable.Columns.Add("wide_runs", typeof(int));
+                    deliveriesTable.Columns.Add("noball_runs", typeof(int));
+                    deliveriesTable.Columns.Add("extra_runs", typeof(int));
+                    deliveriesTable.Columns.Add("total_runs", typeof(int));
                     deliveriesTable.Load(dr);
                     return deliveriesTable;
                 }
